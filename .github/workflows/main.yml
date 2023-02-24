@@ -37,7 +37,7 @@ jobs:
         # コンテナイメージをDocker Hubにプッシュ
       - name: Push image to Docker Hub
         run: |
-          # Docker Hub ログイン
+          # Docker Hub ログイン --passwordが途中で切られてしまってエラーになる。
           # docker login docker.io --username ${{ secrets.USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
           # イメージプッシュ
           docker image push ${{ secrets.USERNAME }}/gitops-go-app:${{ github.run_number }}
