@@ -28,11 +28,17 @@ jobs:
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
 
+      - name: Login to Docker Hub
+        users: docker/login-action@v2
+        with:
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
         # コンテナイメージをDocker Hubにプッシュ
       - name: Push image to Docker Hub
         run: |
           # Docker Hub ログイン
-          docker login docker.io --username ${{ secrets.USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
+          # docker login docker.io --username ${{ secrets.USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
           # イメージプッシュ
           docker image push ${{ secrets.USERNAME }}/gitops-go-app:${{ github.run_number }}
 
